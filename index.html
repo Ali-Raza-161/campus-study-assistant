@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Study Assistant</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>🎓 Campus Study Assistant</h1>
+    <p>Plan, summarise, quiz yourself, and ask study questions — no account, no API key.</p>
+  </div>
+  <nav aria-label="Sections">
+    <a href="#planner">Planner</a>
+    <a href="#notes">Notes</a>
+    <a href="#chat">Ask</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Study planner -->
+  <section id="planner" class="card">
+    <h2>📅 Study Planner</h2>
+    <p class="hint">Add a task, pick its subject and due date. Tasks are saved in your browser (localStorage) and survive a page refresh.</p>
+    <form id="task-form">
+      <label>Task <input id="task-title" type="text" placeholder="e.g. Revise calculus chapter 3" required></label>
+      <label>Subject <input id="task-subject" type="text" placeholder="e.g. Maths" required></label>
+      <label>Due date <input id="task-due" type="date" required></label>
+      <button type="submit">Add task</button>
+    </form>
+    <p id="task-count" aria-live="polite"></p>
+    <ul id="task-list"></ul>
+  </section>
+
+  <!-- Notes: summariser + quiz share one input -->
+  <section id="notes" class="card">
+    <h2>📝 Notes Summariser &amp; Quiz Generator</h2>
+    <p class="hint">Paste your notes below (at least 3 sentences works best), then summarise them or turn them into a quiz.</p>
+    <label class="sr-only" for="notes-input">Your notes</label>
+    <textarea id="notes-input" rows="9" placeholder="Paste your notes here…&#10;&#10;Example: Photosynthesis is how plants make food using sunlight. It happens in chloroplasts, in the green pigment chlorophyll. Carbon dioxide and water are turned into glucose and oxygen. The glucose is used for energy and growth."></textarea>
+    <div class="actions">
+      <button id="summarise-btn" type="button">Summarise notes</button>
+      <button id="quiz-btn" type="button">Generate quiz</button>
+      <button id="sample-notes-btn" type="button" class="secondary">Load sample notes</button>
+    </div>
+    <h3>Summary</h3>
+    <div id="summary-output" class="output">Your summary will appear here.</div>
+    <h3>Quiz</h3>
+    <div id="quiz-output" class="output">Your quiz will appear here. Fill in the blanks and pick the MCQ answers, then reveal or check them.</div>
+  </section>
+
+  <!-- Chat Q&A -->
+  <section id="chat" class="card">
+    <h2>💬 Ask a Study Question</h2>
+    <p class="hint">Ask about study techniques or subjects like maths, physics, programming, or biology. Try a suggestion chip, or type your own question.</p>
+    <div id="chat-window" aria-live="polite"></div>
+    <div class="chips" role="group" aria-label="Suggestion questions">
+      <button type="button" data-q="How does the Pomodoro technique work?">Pomodoro technique</button>
+      <button type="button" data-q="Explain Newton's laws of motion">Newton's laws</button>
+      <button type="button" data-q="What is a loop in programming?">Loops in programming</button>
+      <button type="button" data-q="How can I revise more effectively?">Better revision</button>
+      <button type="button" data-q="What is photosynthesis?">Photosynthesis</button>
+    </div>
+    <form id="chat-form">
+      <label class="sr-only" for="chat-input">Your question</label>
+      <input id="chat-input" type="text" placeholder="Ask a study question…" autocomplete="off" required>
+      <button type="submit">Send</button>
+    </form>
+    <p class="hint small">Local, rule-based answers from <code>data/topics.json</code>. No question leaves your browser.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Campus Study Assistant · Runs fully in your browser · No API key, no server, no account needed.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
